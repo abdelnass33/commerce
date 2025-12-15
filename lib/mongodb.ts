@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
+console.log('🔍 MongoDB Configuration Check:');
+console.log('  - URI defined:', !!MONGODB_URI);
+console.log('  - URI starts with mongodb:', MONGODB_URI?.startsWith('mongodb'));
+
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
@@ -14,6 +18,7 @@ if (!cached) {
 
 async function dbConnect() {
   if (cached.conn) {
+    console.log('✅ Using cached MongoDB connection');
     return cached.conn;
   }
 
@@ -25,9 +30,20 @@ async function dbConnect() {
       socketTimeoutMS: 45000,
     };
 
+    console.log('🔄 Connecting to MongoDB...');
+    console.log('MongoDB URI:', MONGODB_URI ? '✅ Present' : '❌ Missing');
+    console.log('Connection options:', JSON.stringify(opts, null, 2));
+    
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('MongoDB connected successfully');
+      console.log('✅ MongoDB connected successfully!');
+      console.log('Database:', mongoose.connection.db.databaseName);
+      console.log('Host:', mongoose.connection.host);
+      console.log('Connection ready state:', mongoose.connection.readyState);
       return mongoose;
+    }).catch((error) => {
+      console.error('❌ MongoDB connection failed:', error.message);
+      console.error('❌ Error code:', error.code);
+      throw error;
     });
   }
 
@@ -35,7 +51,7 @@ async function dbConnect() {
     cached.conn = await cached.promise;
   } catch (e) {
     cached.promise = null;
-    console.error('MongoDB connection error:', e);
+    console.error('❌ MongoDB connection error:', e);
     throw e;
   }
 

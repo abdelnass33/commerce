@@ -7,7 +7,9 @@ import { errorResponse, successResponse } from '@/lib/api-response';
 // Get all products with filters
 export async function GET(request: NextRequest) {
   try {
+    console.log('📦 GET /api/products - Starting...');
     await dbConnect();
+    console.log('✅ Database connected, fetching products...');
 
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
@@ -50,6 +52,13 @@ export async function GET(request: NextRequest) {
       Product.countDocuments(query),
     ]);
 
+    console.log('📊 Query results:', { 
+      totalProducts: total, 
+      returnedProducts: products.length,
+      page,
+      query: JSON.stringify(query)
+    });
+
     return successResponse({
       products,
       pagination: {
@@ -60,7 +69,9 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error: any) {
-    console.error('Error fetching products:', error);
+    console.error('❌ Error fetching products:', error);
+    console.error('❌ Error stack:', error.stack);
+    console.error('❌ Error name:', error.name);
     return errorResponse(error.message || 'Failed to fetch products', 500);
   }
 }

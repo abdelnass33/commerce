@@ -4,6 +4,10 @@ import { NextRequest } from 'next/server';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
+console.log('🔐 JWT Configuration:');
+console.log('  - JWT_SECRET defined:', !!process.env.JWT_SECRET);
+console.log('  - Using default secret:', !process.env.JWT_SECRET);
+
 export interface TokenPayload {
   userId: string;
   email: string;
