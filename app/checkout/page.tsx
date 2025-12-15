@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import { useCartStore } from '@/store/cartStore';
@@ -14,6 +14,7 @@ export default function CheckoutPage() {
   const { items, getTotal, clearCart } = useCartStore();
   const { isAuthenticated, user } = useAuthStore();
   const [loading, setLoading] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   
   const [shippingAddress, setShippingAddress] = useState({
     name: user?.name || '',
@@ -32,13 +33,16 @@ export default function CheckoutPage() {
   const subtotal = getTotal();
   const total = subtotal - discount;
 
-  if (!isAuthenticated) {
-    router.push('/login?redirect=/checkout');
-    return null;
-  }
+  useEffect(() => {
+    setIsClient(true);
+    if (!isAuthenticated) {
+      router.push('/login?redirect=/checkout');
+    } else if (items.length === 0) {
+      router.push('/cart');
+    }
+  }, [isAuthenticated, items.length, router]);
 
-  if (items.length === 0) {
-    router.push('/cart');
+  if (!isClient || !isAuthenticated || items.length === 0) {
     return null;
   }
 

@@ -60,6 +60,8 @@ export const promotionsAPI = {
   getAll: (params?: any) => api.get('/promotions', { params }),
   validate: (data: any) => api.post('/promotions/validate', data),
   create: (data: any) => api.post('/promotions', data),
+  update: (id: string, data: any) => api.put(`/promotions/${id}`, data),
+  delete: (id: string) => api.delete(`/promotions/${id}`),
 };
 
 export const ordersAPI = {

@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       address,
     });
 
-    const userResponse = user.toObject();
+    const userResponse: any = user.toObject();
     delete userResponse.password;
 
     return successResponse(userResponse, 201);
