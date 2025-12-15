@@ -5,6 +5,9 @@ import { Toaster } from 'react-hot-toast';
 export const metadata: Metadata = {
   title: "Sneaker Commerce - Sneakers & Streetwear",
   description: "Shop the latest sneakers and streetwear fashion",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
