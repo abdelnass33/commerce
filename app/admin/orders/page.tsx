@@ -38,7 +38,7 @@ export default function AdminOrders() {
 
   const updateOrderStatus = async (orderId: string, status: string) => {
     try {
-      await ordersAPI.update(orderId, { status });
+      await ordersAPI.updateStatus(orderId, { status });
       toast.success('Statut mis à jour');
       fetchOrders();
       if (selectedOrder?._id === orderId) {
