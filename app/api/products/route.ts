@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server';
 import dbConnect from '@/lib/mongodb';
+import Category from '@/models/Category'; // Import Category first
 import Product from '@/models/Product';
 import { requireAdmin } from '@/lib/auth';
 import { errorResponse, successResponse } from '@/lib/api-response';
