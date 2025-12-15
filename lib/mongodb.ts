@@ -1,5 +1,12 @@
 import mongoose from 'mongoose';
 
+// Import all models to ensure they're registered
+import '../models/Category';
+import '../models/Product';
+import '../models/User';
+import '../models/Order';
+import '../models/Promotion';
+
 const MONGODB_URI = process.env.MONGODB_URI!;
 
 console.log('🔍 MongoDB Configuration Check:');
