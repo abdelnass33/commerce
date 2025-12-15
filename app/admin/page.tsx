@@ -42,7 +42,7 @@ export default function AdminDashboard() {
       <div className="p-6 lg:p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-          <p className="text-gray-600">Vue d'ensemble de votre boutique</p>
+          <p className="text-gray-600">Vue d&apos;ensemble de votre boutique</p>
         </div>
 
         {loading ? (
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
                     <TrendingUp className="h-6 w-6 text-green-600" />
                   </div>
                 </div>
-                <div className="text-sm text-gray-600 mb-1">Chiffre d'affaires</div>
+                <div className="text-sm text-gray-600 mb-1">Chiffre d&apos;affaires</div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">
                   {stats.revenue.total.toLocaleString()} FCFA
                 </div>

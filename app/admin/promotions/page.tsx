@@ -382,7 +382,7 @@ export default function AdminPromotions() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Limite d'utilisation
+                    Limite d&apos;utilisation
                   </label>
                   <input
                     type="number"
@@ -392,7 +392,7 @@ export default function AdminPromotions() {
                     placeholder="Illimité"
                   />
                   <p className="text-xs text-gray-500 mt-1">
-                    Nombre maximum d'utilisations (laissez vide pour illimité)
+                    Nombre maximum d&apos;utilisations (laissez vide pour illimité)
                   </p>
                 </div>
 
